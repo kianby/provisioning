@@ -1,0 +1,10 @@
+---
+###############################################################################
+# Set your variables here.
+# For a complete reference look at the `vars/defaults.yml` file.
+###############################################################################
+
+# UNIX users
+unix_users:
+  - root
+  - yannic

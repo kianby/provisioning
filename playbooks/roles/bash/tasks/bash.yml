@@ -1,0 +1,15 @@
+- name: Install Bash
+  apt: name={{ item }} state=present
+  with_items:
+    - bash
+    - bash-completion
+
+- name: Change bashrc
+  file: src=/usr/local/etc/dotfiles/bash/__bashrc dest=/root/.bashrc owner=root group=root state=link force=yes
+  with_items:  unix_users
+  when: item == "root"
+
+- name: Change bashrc
+  file: src=/usr/local/etc/dotfiles/bash/__bashrc dest=/home/{{ item }}/.bashrc owner={{ item }} group={{ item }} state=link force=yes
+  with_items:  unix_users
+  when: item != "root"

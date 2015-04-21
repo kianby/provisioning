@@ -1,0 +1,11 @@
+- name: Install Git
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - tig
+
+- name: Clone GitHub dot files
+  git: repo=https://github.com/kianby/dotfiles.git
+       dest=/usr/local/etc/dotfiles
+
+

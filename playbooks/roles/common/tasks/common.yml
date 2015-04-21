@@ -1,0 +1,22 @@
+- name: Regenerate apt-cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install default packages
+  apt: name={{ item }} state=present
+  with_items:
+    - aptitude
+    - bash
+    - cpp
+    - dos2unix
+    - gcc
+    - python-apt
+    - python3
+    - sqlite3
+    - sudo
+    - unzip
+    - wget
+
+- name: Create UNIX regular users
+  user: name={{ item }} password={{ default_unix_password }} shell=/bin/bash
+  with_items:  unix_users
+  when: item != "root"

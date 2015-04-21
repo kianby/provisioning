@@ -1,0 +1,31 @@
+- name: Install VIM
+  apt: name={{ item }} state=present
+  with_items:
+    - vim
+
+- name: Install Vundle
+  git: repo=https://github.com/gmarik/Vundle.vim.git
+       dest=/root/.vim/bundle/Vundle.vim
+  with_items: unix_users
+  when: item == "root"
+
+- name: Install Vundle
+  git: repo=https://github.com/gmarik/Vundle.vim.git
+       dest=/home/{{ item }}/.vim/bundle/Vundle.vim
+  with_items:  unix_users
+  when: item != "root"
+
+- name: Install vimrc
+  file: src=/usr/local/etc/dotfiles/vim/__vimrc dest=/root/.vimrc owner=root group=root state=link force=yes
+  with_items: unix_users
+  when: item == "root"
+
+- name: Install vimrc
+  file: src=/usr/local/etc/dotfiles/vim/__vimrc dest=/home/{{ item }}/.vimrc owner={{ item }} group={{ item }} state=link force=yes
+  with_items:  unix_users
+  when: item != "root"
+
+- name: Fix VIM permissions
+  file: name=/home/{{ item }}/.vim owner={{ item }} group={{ item }}
+  with_items:  unix_users
+  when: item != "root"
