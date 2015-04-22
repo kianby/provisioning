@@ -9,4 +9,5 @@
     - git
     - bash
     - vim
+    - tmux
     - nginx

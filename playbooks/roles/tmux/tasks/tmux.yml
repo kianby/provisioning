@@ -1,0 +1,14 @@
+- name: Install Tmux
+  apt: name={{ item }} state=present
+  with_items:
+    - tmux
+
+- name: Install tmux conf
+  file: src=/usr/local/etc/dotfiles/tmux/__tmux.conf dest=/root/.tmux.conf owner=root group=root state=link force=yes
+  with_items: unix_users
+  when: item == "root"
+
+- name: Install tmux conf
+  file: src=/usr/local/etc/dotfiles/tmux/__tmux.conf dest=/home/{{ item }}/.tmux.conf owner={{ item }} group={{ item }} state=link force=yes
+  with_items:  unix_users
+  when: item != "root"
