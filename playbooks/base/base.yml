@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  sudo: yes
+  sudo: no
   vars_files:
     - vars/defaults.yml
     - vars/user.yml
@@ -10,4 +10,3 @@
     - bash
     - vim
     - tmux
-    - nginx

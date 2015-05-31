@@ -8,13 +8,5 @@
 unix_users:
   - root
 
-# Default UNIX password is empty
-default_unix_password: $1$SomeSalt$sLtuObRBEqqpW3Uc0aRyb1
-
-# ntp
-ntp_servers:
-  # use nearby ntp servers by default
-  - 0.pool.ntp.org
-  - 1.pool.ntp.org
-  - 2.pool.ntp.org
-  - 3.pool.ntp.org
+# Default UNIX password for regular users
+default_unix_password: u$S0meSalt_sLtuObRBEqqpW3U-0aRyb1

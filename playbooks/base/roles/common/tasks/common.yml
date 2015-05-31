@@ -15,6 +15,7 @@
     - sudo
     - unzip
     - wget
+    - ntp
 
 - name: Create UNIX regular users
   user: name={{ item }} password={{ default_unix_password }} shell=/bin/bash
