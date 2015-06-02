@@ -1,0 +1,9 @@
+- name: Install Python packages
+  apt: name={{ item }} state=present
+  with_items:
+    - python3
+    - python-pip
+    - python3-pip
+
+- name: Install Pew tool
+  pip: name=pew

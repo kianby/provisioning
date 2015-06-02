@@ -1,9 +1,19 @@
 ---
- - name: Drop blogduyax nginx.conf file
+ - name: Drop blog nginx.conf file
    copy: src=blogduyax.conf dest=/etc/nginx/sites-available/blogduyax.conf owner=root group=root mode=644
 
  - name: Make blogduyax available 
    file: src=/etc/nginx/sites-available/blogduyax.conf dest=/etc/nginx/sites-enabled/blogduyax.conf owner=root group=root state=link
+
+ - name: Clone blog from GitHub
+   git: repo=https://github.com/kianby/blog.git
+        dest=/usr/local/src/blogduyax
+
+ - name: Configure Pelican virtual env
+   pip: requirements=/usr/local/src/blogduyax/requirements.txt virtualenv=/root/.virtualenvs/pelican executable=pip2
+
+ - name: Drop build script 
+   copy: src=build_blog.sh dest=/usr/local/bin/build_blog.sh owner=root group=root mode=755
 
  - name: Reload nginx configuration
    service: name=nginx state=reloaded

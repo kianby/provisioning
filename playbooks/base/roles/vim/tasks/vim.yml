@@ -25,6 +25,17 @@
   with_items:  unix_users
   when: item != "root"
 
+- name: Create VIM backup
+  file: path=/root/.backup state=directory mode=0755
+  with_items: unix_users
+  when: item == "root"
+
+- name: Create VIM backup
+  file: path=/home/{{ item }}/.backup owner={{ item }} group={{ item }} state=directory mode=0755
+  with_items:  unix_users
+  when: item != "root"
+
+
 - name: Fix VIM permissions
   file: name=/home/{{ item }}/.vim owner={{ item }} group={{ item }}
   with_items:  unix_users
