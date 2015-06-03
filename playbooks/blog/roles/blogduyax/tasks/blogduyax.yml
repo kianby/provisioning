@@ -1,6 +1,6 @@
 ---
  - name: Drop blog nginx.conf file
-   copy: src=blogduyax.conf dest=/etc/nginx/sites-available/blogduyax.conf owner=root group=root mode=644
+   copy: src=blogduyax-nginx.conf dest=/etc/nginx/sites-available/blogduyax.conf owner=root group=root mode=644
 
  - name: Make blogduyax available 
    file: src=/etc/nginx/sites-available/blogduyax.conf dest=/etc/nginx/sites-enabled/blogduyax.conf owner=root group=root state=link

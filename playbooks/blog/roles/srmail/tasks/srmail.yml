@@ -1,0 +1,13 @@
+---
+ - name: Clone SRmail from GitHub
+   git: repo=https://github.com/kianby/srmail.git
+        dest=/usr/local/src/srmail
+
+ - name: Create SRmail virtual env
+   command: creates=/root/.virtualenvs/srmail virtualenv -p python3.4 /root/.virtualenvs/srmail
+
+ - name: Configure SRmail virtual env
+   pip: requirements=/usr/local/src/srmail/requirements.txt virtualenv=/root/.virtualenvs/srmail executable=pip3
+
+ - name: Drop supervisor config for SRmail
+   copy: src=srmail-supervisor.conf dest=/etc/supervisor/conf.d/srmail.conf owner=root group=root mode=644

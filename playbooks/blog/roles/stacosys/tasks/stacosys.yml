@@ -1,0 +1,20 @@
+---
+ - name: Clone Stacosys from GitHub
+   git: repo=https://github.com/kianby/stacosys.git
+        dest=/usr/local/src/stacosys
+
+ - name: Create Stacosys virtual env
+   command: creates=/root/.virtualenvs/stacosys virtualenv -p python3.4 /root/.virtualenvs/stacosys
+
+ - name: Configure Stacosys virtual env
+   pip: requirements=/usr/local/src/stacosys/requirements.txt virtualenv=/root/.virtualenvs/stacosys executable=pip3
+
+ - name: Drop supervisor config for Stacosys
+   copy: src=stacosys-supervisor.conf dest=/etc/supervisor/conf.d/stacosys.conf owner=root group=root mode=644
+
+ - name: Drop stacosys NginX config file
+   copy: src=stacosys-nginx.conf dest=/etc/nginx/sites-available/stacosys.conf owner=root group=root mode=644
+
+ - name: Make stacosys available 
+   file: src=/etc/nginx/sites-available/stacosys.conf dest=/etc/nginx/sites-enabled/stacosys.conf owner=root group=root state=link
+   notify: restart nginx

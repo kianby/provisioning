@@ -7,3 +7,5 @@
   roles:
     - nginx
     - blogduyax
+    - srmail
+    - stacosys
