@@ -15,5 +15,15 @@
  - name: Drop build script 
    copy: src=build_blog.sh dest=/usr/local/bin/build_blog.sh owner=root group=root mode=755
 
- - name: Reload nginx configuration
-   service: name=nginx state=reloaded
+ - name: Build once
+   command: /usr/local/bin/build_blog.sh yes >/dev/null
+
+ - name: Cron Pelican build
+   cron: name="pelican build" minute="0" hour="*" job="/usr/local/bin/build_blog.sh > /dev/null"
+
+ - name : Create SSL directory for NginX
+   file: path=/etc/nginx/ssl state=directory mode=0755
+
+ - name: Create self-signed SSL cert
+   command: openssl req -new -nodes -x509 -subj "/C=FR/ST=PACA/L=Rognac/O=Yax/CN=blogduyax.madyanne.fr" -days 3650 -keyout /etc/nginx/ssl/blogduyax.key -out /etc/nginx/ssl/blogduyax.crt -extensions v3_ca creates=/etc/nginx/ssl/blogduyax.crt
+   notify: restart nginx
