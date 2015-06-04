@@ -13,3 +13,26 @@
   file: src=/usr/local/etc/dotfiles/bash/__bashrc dest=/home/{{ item }}/.bashrc owner={{ item }} group={{ item }} state=link force=yes
   with_items:  unix_users
   when: item != "root"
+
+- name:  Install Oh my GIT base
+  file: src=/usr/local/etc/dotfiles/bash/__ohmygitbase.sh dest=/root/.ohmygitbase.sh owner=root group=root state=link force=yes
+  with_items:  unix_users
+  when: item == "root"
+
+- name:  Install Oh my GIT base
+  file: src=/usr/local/etc/dotfiles/bash/__ohmygitbase.sh dest=/home/{{ item }}/.ohmygitbase.sh owner={{ item }} group={{ item }} state=link force=yes
+  with_items:  unix_users
+  when: item != "root"
+
+- name:  Install Oh my GIT prompt
+  file: src=/usr/local/etc/dotfiles/bash/__ohmygitprompt.sh dest=/root/.ohmygitprompt.sh owner=root group=root state=link force=yes
+  with_items:  unix_users
+  when: item == "root"
+
+- name:  Install Oh my GIT prompt
+  file: src=/usr/local/etc/dotfiles/bash/__ohmygitprompt.sh dest=/home/{{ item }}/.ohmygitprompt.sh owner={{ item }} group={{ item }} state=link force=yes
+  with_items:  unix_users
+  when: item != "root"
+
+
+

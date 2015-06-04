@@ -6,4 +6,4 @@
     - python3-pip
 
 - name: Install Pew tool
-  pip: name=pew
+  pip: name=pew state=present

@@ -16,6 +16,6 @@
     - supervisor
 
 - name: Create UNIX regular users
-  user: name={{ item }} password={{ default_unix_password }} shell=/bin/bash
+  user: name={{ item }} password={{ default_unix_password }} shell=/bin/bash state=present
   with_items:  unix_users
   when: item != "root"
