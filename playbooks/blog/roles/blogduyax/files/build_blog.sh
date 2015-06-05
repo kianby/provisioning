@@ -1,7 +1,5 @@
 #!/bin/bash
 
-forced=${1:?"no"};shift
-
 # add virtualenv to path
 export PATH=$PATH:/root/.virtualenvs/pelican/bin
 
@@ -9,7 +7,7 @@ mkdir -p /var/www/blogduyax >/dev/null
 
 cd /usr/local/src/blogduyax
 
-if [[ "$forced" = "no" ]] ; then
+if [[ "$#" -eq 0 ]] ; then
     echo "Pelican is checking if publishing is needed..."
     git fetch origin
     reslog=$(git log HEAD..origin/master --oneline)
