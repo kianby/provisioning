@@ -19,7 +19,7 @@
    command: /usr/local/bin/build_blog.sh yes >/dev/null
 
  - name: Cron Pelican build
-   cron: name="pelican build" minute="0" hour="*" job="/usr/local/bin/build_blog.sh > /dev/null"
+   cron: name="pelican build" minute="0" hour="*" job="/usr/local/bin/build_blog.sh > /dev/null 2>&1"
 
  - name : Create SSL directory for NginX
    file: path=/etc/nginx/ssl state=directory mode=0755
