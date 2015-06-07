@@ -14,6 +14,7 @@
     - wget
     - ntp
     - supervisor
+    - curl
 
 - name: Create UNIX regular users
   user: name={{ item }} password={{ default_unix_password }} shell=/bin/bash state=present
